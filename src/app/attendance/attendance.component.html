@@ -1,0 +1,30 @@
+<div  *ngIf="authService.isLoggedIn(); else noAccess">
+</div>
+<div class="container">
+  <h2>🕒 Mark Attendance</h2>
+
+<div *ngIf="!checkedIn">
+  <button (click)="checkIn()">✅ Check In</button>
+</div>
+
+<div *ngIf="checkedIn && !checkedOut">
+  <button (click)="checkOut()">⬅️ Check Out</button>
+</div>
+
+<div *ngIf="checkedIn && checkedOut">
+  <p>You have already clocked out successfully.</p>
+</div>
+
+<div class="summary">
+  <p>✔️ Check-In Time: {{ checkInTime || '-' }}</p>
+  <p>⛔ Check-Out Time: {{ checkOutTime || '-' }}</p>
+  <p>📋 Attendance Status: {{ status || '-'}}  </p>
+</div>
+
+
+</div>
+
+<ng-template #noAccess>
+    <h3>You are not authorized to view this page.</h3>
+    <a routerLink="/login">Click here to login</a>
+  </ng-template> 

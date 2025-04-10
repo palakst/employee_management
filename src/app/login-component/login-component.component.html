@@ -1,0 +1,40 @@
+<div>
+  
+
+      <div class="container" style="width: 500px;">
+        <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+            <h1 style="text-align: center" class="mb-2">User Login</h1>
+          <div class="mb-3">
+            <label class="form-label">Enter Username: </label>
+            <input class="form-control" type="text" [(ngModel)]="username" name="username" placeholder="Username" required/>
+          </div>
+          <div class="mb-3 position-relative">
+  <label class="form-label">Enter Password:</label>
+  <div class="input-group">
+    <input 
+      class="form-control" 
+      [type]="passwordFieldType" 
+      [(ngModel)]="password" 
+      name="password" 
+      placeholder="Password" 
+      required
+    />
+    <span class="input-group-text" (click)="togglePassword()" style="cursor: pointer;">
+      <i 
+        class="bi" 
+        [ngClass]="passwordFieldType === 'password' ? 'bi-eye' : 'bi-eye-slash'"
+      >👀</i>
+    </span>
+  </div>
+</div>
+          <div class="mb-3">
+            <button type="submit" class="btn btn-outline-primary">Login</button>
+          </div>
+      
+          <p *ngIf="loginFailed" style="color: red;">Invalid credentials</p>
+          <p *ngIf="loginSuccess" style="color: green;">Successful Login</p>
+        </form>
+      </div>
+      
+</div>
+

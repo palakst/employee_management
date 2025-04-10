@@ -1,0 +1,57 @@
+<div  *ngIf="authService.isLoggedIn(); else noAccess">
+    
+
+<div class="container">
+    <div class="row">
+        <div class="card m-1 col-12 col-md-2" style="width: 18rem;">
+            <img class="card-img-top card-image-size" src="assets/book_seat.png" alt="book_seat">
+            <div class="card-body">
+              <a href="/book_seat"class="styled-button">Book My Seat ➡️</a>
+              <h5 class="card-title">📍 Book a Seat</h5>
+            </div>
+          </div>
+
+          <div class="card m-1 col-12 col-md-2" style="width: 18rem;">
+            <img class="card-img-top" src="assets/book_meeting_room.png" alt="book_meeting_room">
+            <div class="card-body">
+              <a href="/book_meeting_room" class="styled-button">Book Meeting Room➡️</a>
+              <h5 class="card-title">🏢 Book a Meeting Room</h5>
+            </div>
+          </div>
+
+          <div class="card m-1 col-12 col-md-2" style="width: 18rem;">
+            <img class="card-img-top" src="assets/check_in_out.png" alt="check_in_out">
+            <div class="card-body">
+              <a href="/mark_attendance" class="styled-button">Mark Attendance➡️</a>
+              <h5 class="card-title">🕒 Check In / Check Out</h5>
+            </div>
+          </div>
+
+          <div class="card m-1 col-12 col-md-2" style="width: 18rem;">
+            <img class="card-img-top" src="assets/attendance.png" alt="attendance">
+            <div class="card-body">
+              <a href="/booking_history" class="styled-button">View Bookings➡️</a>
+              <h5 class="card-title">📅 View My Bookings / Attendance</h5>
+            </div>
+          </div>
+          <div class="card m-1 col-12 col-md-2" style="width: 18rem;">
+            <img class="card-img-top" src="assets/connect_manager.png" alt="connect_manager">
+            <div class="card-body">
+              <a href="/connect_manager" class="styled-button">Chat with Manager➡️</a>
+              <h5 class="card-title">Contact Manager</h5>
+            </div>
+          </div>
+          
+          <div class="card m-1 col-12 col-md-2" style="width: 18rem;">
+            <img class="card-img-top" src="assets/manager_panel.png" alt="manager_panel">
+            <div class="card-body">
+              <a href="/manager_actions" class="styled-button">Manager➡️</a>
+              <h5 class="card-title">👤Manager Panel</h5>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>
+<ng-template #noAccess>
+  <app-login-component></app-login-component>
+</ng-template> 
