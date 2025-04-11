@@ -1,4 +1,16 @@
-<p>manager-panel works!</p>
-<ng-template #noAccess>
-    <app-login-component></app-login-component>
-  </ng-template> 
+<div  *ngIf="authService.getUserRole() =='manager'; else notAuthorised">
+  <div class="container">
+    <div class="row">
+      <div class="card m-1 col-12 col-md-2" style="width: 18rem;">
+        <img class="card-img-top" src="assets/manager_panel.png" alt="msnsger panel">
+        <div class="card-body">
+          <a href="/mark_attendance" class="styled-button">Manager Action➡️</a>
+          <h5 class="card-title">Manager action</h5>
+        </div>
+      </div>  
+    </div>
+</div>
+</div>
+<ng-template #notAuthorised>
+<h3 style="color: red;">You need to be a manager to access this page</h3>
+</ng-template> 

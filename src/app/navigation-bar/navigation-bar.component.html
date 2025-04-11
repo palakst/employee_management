@@ -1,5 +1,13 @@
-<nav class="navbar bg-body-tertiary mb-3">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/dashboard">Company Portal</a>
-    </div>
-  </nav> 
+      <a class="navbar-brand" href="/dashboard">Company Portal</a>      
+      <div *ngIf="authService.isLoggedIn()==true">
+        <form class="d-flex">
+          <button class="btn btn-outline-success" type="submit" (click)="authService.logout()">Logout</button>
+        </form>
+      </div>      
+      </div>
+  </nav>
+
+
+

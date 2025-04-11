@@ -1,0 +1,18 @@
+.styled-button {
+    display: inline-block;
+    border-radius: 25px;
+    text-decoration: none;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);    padding: 3px 25px;
+    color: white;
+    margin:0 17px 16px;
+    white-space: normal;           
+    word-break: break-word;      
+    max-width: 100%;             
+    box-sizing: border-box;   
+     
+}
+
+.styled-button:hover{
+    background: rgba(9,9,121,1);
+}

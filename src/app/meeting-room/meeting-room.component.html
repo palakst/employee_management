@@ -1,4 +1,43 @@
-<p>meeting-room works!</p>
-<ng-template #noAccess>
-    <app-login-component></app-login-component>
-  </ng-template> 
+<div class="container">
+  <div class="row">
+      <div class="card col-md-4 m-2" *ngFor="let room of rooms">
+        <div class="card-body">
+          <h3>{{ room.name }}</h3>
+          <p>Capacity: {{ room.capacity }}</p>
+        </div>
+        
+        <button (click)="selectRoom(room)" class="styled-button">Book</button>
+      </div>
+
+       <!-- Booking form -->
+        <div class="card">
+          <div *ngIf="selectedRoom" class="card-body">
+            <h3>Booking for: {{ selectedRoom.name }}</h3>
+          
+            <label>Date:
+              <input type="date" [(ngModel)]="selectedDate" />
+            </label>
+          
+            <label>Start Time:
+              <input type="time" [(ngModel)]="startTime" />
+            </label>
+          
+            <label>End Time:
+              <input type="time" [(ngModel)]="endTime" />
+            </label>
+          
+            <button (click)="bookRoom()" class="styled-button">Confirm Booking</button>
+          
+            <p class="error" *ngIf="bookingError">{{ bookingError }}</p>
+          </div>
+      
+        </div>
+   
+    
+   
+  </div>
+ 
+</div>
+
+
+

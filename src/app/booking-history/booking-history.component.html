@@ -1,4 +1,18 @@
-<p>booking-history works!</p>
-<ng-template #noAccess>
-    <app-login-component></app-login-component>
-  </ng-template> 
+<div *ngIf="attendance.getAttendance(authService.getCurrentUser()?.id) as userAttendance; else noData">
+  <h3>Today's Attendance</h3>
+  <p>Date: {{ userAttendance.today?.date }}</p>
+  <p>Check-In: {{ userAttendance.today?.checkInTime }}</p>
+  <p>Check-Out: {{ userAttendance.today?.checkOutTime }}</p>
+  <p>Status: {{ userAttendance.today?.status }}</p>
+
+  <h3>History</h3>
+  <ul>
+    <li *ngFor="let record of userAttendance.history">
+      {{ record.date }} - {{ record.status }} ({{ record.checkInTime }} → {{ record.checkOutTime }})
+    </li>
+  </ul>
+</div>
+
+<ng-template #noData>
+  <p>No attendance data found.</p>
+</ng-template>

@@ -6,8 +6,12 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private readonly mockUsers = [
-    { username: 'employee1', password: 'pass123', role: 'employee' },
+    { username: 'e1', password: 'p', role: 'employee' },
+    { username: 'e2', password: 'p', role: 'employee' },
+    { username: 'e3', password: 'p', role: 'employee' },
+    { username: 'e4', password: 'p', role: 'employee' },
     { username: 'manager1', password: 'pass123', role: 'manager' },
+    { username: 'manager2', password: 'pass123', role: 'manager' },
   ];
 
   constructor(private router: Router) {}
