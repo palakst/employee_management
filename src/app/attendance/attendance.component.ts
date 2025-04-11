@@ -11,14 +11,26 @@ export class AttendanceComponent implements OnInit {
   checkInTime: string | null = null;
   checkOutTime: string | null = null;
   status: string | null = null;
+  hasSeatForToday: boolean = false;
+  errorMessage: string = '';
 
   constructor(public authService: AuthService, private router: Router) {}
-
+  private hasSeatBookingForToday(): boolean {
+    const username = this.authService.getCurrentUser()?.username;
+    const today = new Date().toISOString().split('T')[0];
+    const bookingKey = 'seatBookings_' + today;
+    const bookings = JSON.parse(localStorage.getItem(bookingKey) || '[]');
+  
+    return bookings.some((b: any) => b.username === username);
+  }
+  
   ngOnInit(): void {
     const today = this.getTodayKey();
+    this.hasSeatForToday = this.hasSeatBookingForToday(); 
     const data = JSON.parse(localStorage.getItem('attendance_' + today) || '{}');
     this.checkInTime = data.checkInTime || null;
     this.checkOutTime = data.checkOutTime || null;
+
 
     if (this.checkInTime && this.checkOutTime) {
       const inDate = new Date(`2000-01-01T${this.checkInTime}`);
@@ -47,14 +59,21 @@ export class AttendanceComponent implements OnInit {
   }
 
   checkIn() {
+    if (!this.hasSeatBookingForToday()) {
+      this.errorMessage = 'You have no seat booked for now.';
+      return;
+    }
+  
     const now = new Date().toTimeString().split(' ')[0]; // HH:mm:ss format
     this.checkInTime = now;
     this.saveAttendance('checkInTime', now);
+    this.errorMessage = '';
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/mark_attendance']);
     });
-
   }
+  
+  
 
   checkOut() {
     const now = new Date().toTimeString().split(' ')[0]; // HH:mm:ss format

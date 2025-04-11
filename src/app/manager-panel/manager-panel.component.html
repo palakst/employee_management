@@ -1,15 +1,28 @@
 <div  *ngIf="authService.getUserRole() =='manager'; else notAuthorised">
   <div class="container">
     <div class="row">
-      <div class="card m-1 col-12 col-md-2" style="width: 18rem;">
-        <img class="card-img-top" src="assets/manager_panel.png" alt="msnsger panel">
-        <div class="card-body">
-          <a href="/mark_attendance" class="styled-button">Manager Action➡️</a>
-          <h5 class="card-title">Manager action</h5>
+      <div *ngIf="messages.length > 0">
+        <h3>📬 Messages from Employees</h3>
+        <div *ngFor="let msg of messages" class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ msg.subject }} 
+              <span [ngClass]="{
+              'imp_tag': msg.priority === 'Important',
+              'upd_tag': msg.priority === 'Update',
+              'fup_tag': msg.priority === 'Follow up' 
+              }">{{ msg.priority }}</span>
+              
+            </h5>
+            <h6 class="card-subtitle text-muted">From: {{ msg.user }}</h6>
+            <p class="card-text">{{ msg.message }}</p>
+            <small class="text-muted">{{ msg.timestamp | date:'short' }}</small>
+          </div>
         </div>
+      </div>
+      <p *ngIf="messages.length === 0">No messages found.</p>
+      
       </div>  
     </div>
-</div>
 </div>
 <ng-template #notAuthorised>
 <h3 style="color: red;">You need to be a manager to access this page</h3>

@@ -1,18 +1,69 @@
-<div *ngIf="attendance.getAttendance(authService.getCurrentUser()?.id) as userAttendance; else noData">
-  <h3>Today's Attendance</h3>
-  <p>Date: {{ userAttendance.today?.date }}</p>
-  <p>Check-In: {{ userAttendance.today?.checkInTime }}</p>
-  <p>Check-Out: {{ userAttendance.today?.checkOutTime }}</p>
-  <p>Status: {{ userAttendance.today?.status }}</p>
+<div class="container">
+  <div class="booking-history-container">
+    <h2>📚 Booking History</h2>
+  
+    <div class="btn-group">
+      <button [class.active]="showType === 'seat'" (click)="toggleView('seat')" class="btn btn-primary">Seat Bookings</button>
+      <button [class.active]="showType === 'meeting'" (click)="toggleView('meeting')" class="btn btn-primary">Meeting Room Bookings</button>
+    </div>
+  
+    <div *ngIf="showType === 'seat'">
+      <h3>💺 Seat Bookings</h3>
+      <table *ngIf="seatBookings.length > 0" class="table">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Seat No.</th>
+            <th scope="col">Check-In</th>
+            <th scope="col">Check-Out</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of seatBookings">
+            <td>{{ booking.date }}</td>
+            <td>{{ booking.seatNumber }}</td>
+            <td>{{ booking.checkInTime || '-' }}</td>
+            <td>{{ booking.checkOutTime || '-' }}</td>
+            <td [ngClass]="{
+              'overtime': booking.status === 'Overtime',
+  'present': booking.status === 'Present',
+  'halfDay': booking.status === 'Half-day',
+  'absent': booking.status === 'Absent'
+            }">{{ booking.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="seatBookings.length === 0">No seat bookings found.</p>
+    </div>
+  
+    <div *ngIf="showType === 'meeting'">
+      <h3>🏢 Meeting Room Bookings</h3>
+      <table *ngIf="meetingBookings.length > 0" class="table">
+        <thead>
+          <tr>
+            <th scope="row">Date</th>
+            <th scope="row">Room</th>
+            <th scope="row">From</th>
+            <th scope="row">To</th>
+            <th scope="row">Check-In</th>
+            <th scope="row">Check-Out</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of meetingBookings">
+            <td>{{ booking.date }}</td>
+            <td>{{ booking.roomName }} ({{ booking.roomId }})</td>
+            <td>{{ booking.startTime }}</td>
+            <td>{{ booking.endTime }}</td>
+            <td>{{ booking.checkInTime || '-' }}</td>
+            <td>{{ booking.checkOutTime || '-' }}</td>
 
-  <h3>History</h3>
-  <ul>
-    <li *ngFor="let record of userAttendance.history">
-      {{ record.date }} - {{ record.status }} ({{ record.checkInTime }} → {{ record.checkOutTime }})
-    </li>
-  </ul>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="meetingBookings.length === 0">No meeting room bookings found.</p>
+    </div>
+  </div>
+  
 </div>
-
-<ng-template #noData>
-  <p>No attendance data found.</p>
-</ng-template>

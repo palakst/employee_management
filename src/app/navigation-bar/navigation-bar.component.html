@@ -2,7 +2,9 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="/dashboard">Company Portal</a>      
       <div *ngIf="authService.isLoggedIn()==true">
+
         <form class="d-flex">
+          <div ><span class="btn">Hello {{authService.getCurrentUser().username}}</span></div>
           <button class="btn btn-outline-success" type="submit" (click)="authService.logout()">Logout</button>
         </form>
       </div>      

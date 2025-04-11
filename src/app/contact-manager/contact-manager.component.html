@@ -1,4 +1,37 @@
-<p>contact-manager works!</p>
-<ng-template #noAccess>
-    <app-login-component></app-login-component>
-  </ng-template> 
+<div class="container">
+  <h2>Connect With Your Manager</h2>
+
+  <div class="mb-3">
+    <label class="form-label">Subject</label>
+    <input type="text" class="form-control" placeholder="Subject" [(ngModel)]="subject">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Priority</label>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{ priority || 'Select Priority' }}
+      </button>
+      <ul class="dropdown-menu">
+        <li><button class="dropdown-item" (click)="setPriority('Important')">Important</button></li>
+        <li><button class="dropdown-item" (click)="setPriority('Update')">Update</button></li>
+        <li><button class="dropdown-item" (click)="setPriority('Follow up')">Follow up</button></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">What you want to discuss</label>
+    <textarea class="form-control" rows="3" [(ngModel)]="message"></textarea>
+  </div>
+
+  <button class="btn btn-outline-primary" (click)="sendMessage()">Send Updates</button>
+
+  <div *ngIf="confirmationMessage" class="alert mt-3"
+     [ngClass]="{
+       'alert-success': confirmationMessage === 'Message sent.',
+       'alert-danger': confirmationMessage !== 'Message sent.'
+     }">
+  {{ confirmationMessage }}
+</div>
+</div>

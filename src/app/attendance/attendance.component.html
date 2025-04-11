@@ -10,6 +10,12 @@
 <div *ngIf="checkedIn && !checkedOut">
   <button (click)="checkOut()">⬅️ Check Out</button>
 </div>
+<div *ngIf="errorMessage" class="error">
+  <p style="color: red;">{{ errorMessage }} 
+    <a routerLink="/book_seat">Book a Seat here</a>
+  </p>
+</div>
+
 
 <div *ngIf="checkedIn && checkedOut">
   <p style="color: chartreuse;">You have already clocked out successfully.</p>

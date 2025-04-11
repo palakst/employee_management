@@ -11,7 +11,6 @@ export class AuthService {
     { username: 'e3', password: 'p', role: 'employee' },
     { username: 'e4', password: 'p', role: 'employee' },
     { username: 'manager1', password: 'pass123', role: 'manager' },
-    { username: 'manager2', password: 'pass123', role: 'manager' },
   ];
 
   constructor(private router: Router) {}
