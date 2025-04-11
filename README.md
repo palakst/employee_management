@@ -1,5 +1,5 @@
 # Walkthrough
-[![Click to watch the full demo](assets/walkthrough.gif)]
+[![Click to watch the full demo](src/assets/walkthrough.gif)]
 
 
 
